@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "QA Click Reporter",
+    "version": "1.0",
+    "description": "Click anywhere on a page to report a visual bug with screenshot.",
+    "permissions": ["scripting", "activeTab", "storage", "tabs"],
+    "host_permissions": ["<all_urls>"],
+    "action": {
+      "default_popup": "login.html",
+      "default_title": "Enable QA Mode"
+    },
+    "background": {
+      "service_worker": "background.js"
+    }
+    
+  }
+  
