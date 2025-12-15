@@ -137,13 +137,15 @@
 
     const modal = document.createElement('div');
     Object.assign(modal.style, {
-      background: '#fff',
-      borderRadius: '8px',
-      padding: '16px',
-      width: '400px',
-      maxWidth: '90vw',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-      fontFamily: 'Arial, sans-serif',
+      backgroundColor: '#1e1e1e', // bg-[#1e1e1e]
+      borderRadius: '0.75rem', // rounded-xl
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', // shadow-2xl
+      border: '1px solid rgba(255, 255, 255, 0.05)', // border border-white/5
+      width: '100%', // w-full
+      maxWidth: '42rem', // max-w-2xl
+      maxHeight: '90vh', // max-h-[90vh]
+      overflow: 'auto',
+      // padding: '16px',
     });
 
     const img = document.createElement('img');
@@ -152,40 +154,285 @@
     img.style.borderRadius = '4px';
     img.alt = 'Screenshot';
 
-    const textarea = document.createElement('textarea');
-    textarea.placeholder = 'Describe the issue...';
-    textarea.style.width = '100%';
-    textarea.style.marginTop = '10px';
-    textarea.style.minHeight = '80px';
-    textarea.style.padding = '8px';
-    textarea.style.fontSize = '14px';
-    textarea.style.resize = 'vertical';
+    const header = document.createElement('div');
+    Object.assign(header.style, {
+      display: 'flex', // flex
+      alignItems: 'center', // items-center
+      justifyContent: 'space-between', // justify-between
+      padding: '24px', // p-6 (6 * 0.25rem = 1.5rem)
+      borderBottom: '1px solid rgba(255, 255, 255, 0.05)', // border-b border-white/5
+    });
+
+    const headerTitle = document.createElement('h2');
+    headerTitle.textContent = 'Report Issue';
+    Object.assign(headerTitle.style, {
+      color: '#fff',
+      fontSize: '20px',
+      fontWeight: '500',
+    });
+
+    const headerButton = document.createElement('button');
+    Object.assign(headerButton.style, {
+      color: '#ffffff99',
+    });
+
+    const headerButtonContent = document.createElement('span');
+    headerButtonContent.textContent = 'X';
+
+    const imageWrapper = document.createElement('div');
+    Object.assign(imageWrapper.style, {
+      padding: '24px', // p-6 (6 * 0.25rem = 1.5rem)
+      borderBottom: '1px solid rgba(255, 255, 255, 0.05)', // border-b border-white/5
+    });
+
+    const imageInner = document.createElement('div');
+    Object.assign(imageInner.style, {
+      backgroundColor: '#121212', // bg-[#121212]
+      borderRadius: '0.5rem', // rounded-lg
+      overflow: 'hidden', // overflow-hidden
+      border: '1px solid rgba(255, 255, 255, 0.05)', // border border-white/5
+    });
+
+    const markerText = document.createElement('p');
+    markerText.textContent = 'Click location marked on screenshot';
+    Object.assign(markerText.style, {
+      marginTop: '16px', // bg-[#121212]
+      color: '#ffffff66',
+      fontSize: '16px',
+    });
+
+    const form = document.createElement('div');
+    Object.assign(form.style, {
+      padding: '24px',
+    });
+
+    const issueWrapper = document.createElement('div');
+    Object.assign(issueWrapper.style, {
+      marginBottom: '24px',
+    });
+    const issueLabel = document.createElement('label');
+    issueLabel.textContent = 'Name of Issue';
+    Object.assign(issueLabel.style, {
+      display: 'block',
+      color: '#ffffff99',
+      marginBottom: '8px',
+    });
+    const issueInput = document.createElement('input');
+    issueInput.placeholder = 'Brief title for the issue';
+    issueInput.required = true;
+    issueInput.type = 'text';
+    Object.assign(issueInput.style, {
+      width: '100%', // w-full
+      backgroundColor: '#121212', // bg-[#121212]
+      color: '#ffffff', // text-white
+      paddingLeft: '1rem', // px-4
+      paddingRight: '1rem', // px-4
+      paddingTop: '0.625rem', // py-2.5
+      paddingBottom: '0.625rem', // py-2.5
+      borderRadius: '0.5rem', // rounded-lg
+      border: '1px solid rgba(255, 255, 255, 0.05)', // border border-white/5
+      transition: 'border-color 0.3s, color 0.3s', // transition-colors
+      outline: 'none',
+    });
+    issueInput.addEventListener('focus', () => {
+      issueInput.style.borderColor = '#4f9eff';
+    });
+
+    issueInput.addEventListener('blur', () => {
+      issueInput.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+    });
+
+    const descriptionWrapper = document.createElement('div');
+    const descriptionLabel = document.createElement('label');
+    descriptionLabel.textContent = 'Description';
+    Object.assign(descriptionLabel.style, {
+      display: 'block',
+      color: '#ffffff99',
+      marginBottom: '8px',
+    });
+    const descriptionInput = document.createElement('textarea');
+    descriptionInput.required = true;
+    descriptionInput.placeholder = 'Describe the issue in detail...';
+    descriptionInput.rows = 4;
+    Object.assign(descriptionInput.style, {
+      width: '100%', // w-full
+      backgroundColor: '#121212', // bg-[#121212]
+      color: '#ffffff', // text-white
+      paddingLeft: '1rem', // px-4
+      paddingRight: '1rem', // px-4
+      paddingTop: '0.625rem', // py-2.5
+      paddingBottom: '0.625rem', // py-2.5
+      borderRadius: '0.5rem', // rounded-lg
+      border: '1px solid rgba(255, 255, 255, 0.05)', // border border-white/5
+      transition: 'border-color 0.3s, color 0.3s', // transition-colors
+      outline: 'none',
+    });
+    descriptionInput.addEventListener('focus', () => {
+      issueInput.style.borderColor = '#4f9eff';
+    });
+
+    descriptionInput.addEventListener('blur', () => {
+      issueInput.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+    });
+
+    // Grid wrapper (grid grid-cols-2 gap-4)
+    const fieldGrid = document.createElement('div');
+    Object.assign(fieldGrid.style, {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gap: '1rem',
+      paddingBottom: '24px',
+      paddingLeft: '24px',
+      paddingRight: '24px',
+    });
+
+    // ---------- Priority field ----------
+    const priorityWrapper = document.createElement('div');
+
+    const priorityLabel = document.createElement('label');
+    priorityLabel.textContent = 'Priority';
+    Object.assign(priorityLabel.style, {
+      display: 'block',
+      color: 'rgba(255,255,255,0.6)',
+      marginBottom: '0.5rem',
+    });
+
+    const prioritySelect = document.createElement('select');
+    prioritySelect.required = true;
+    Object.assign(prioritySelect.style, {
+      width: '100%',
+      backgroundColor: '#121212',
+      color: '#ffffff',
+      padding: '0.625rem 1rem', // py-2.5 px-4
+      borderRadius: '0.5rem',
+      border: '1px solid rgba(255,255,255,0.05)',
+      outline: 'none',
+      cursor: 'pointer',
+      transition: 'border-color 0.2s ease',
+    });
+
+    prioritySelect.addEventListener('focus', () => {
+      prioritySelect.style.borderColor = '#4f9eff';
+    });
+    prioritySelect.addEventListener('blur', () => {
+      prioritySelect.style.borderColor = 'rgba(255,255,255,0.05)';
+    });
+
+    ['Not Assigned', 'Low', 'Medium', 'High', 'Urgent'].forEach((value) => {
+      const option = document.createElement('option');
+      option.value = value.toLowerCase();
+      option.textContent = value;
+      prioritySelect.appendChild(option);
+    });
+
+    priorityWrapper.appendChild(priorityLabel);
+    priorityWrapper.appendChild(prioritySelect);
+
+    // ---------- Issue Type field ----------
+    const typeWrapper = document.createElement('div');
+
+    const typeLabel = document.createElement('label');
+    typeLabel.textContent = 'Issue Type';
+    Object.assign(typeLabel.style, {
+      display: 'block',
+      color: 'rgba(255,255,255,0.6)',
+      marginBottom: '0.5rem',
+    });
+
+    const typeSelect = document.createElement('select');
+    Object.assign(typeSelect.style, {
+      width: '100%',
+      backgroundColor: '#121212',
+      color: '#ffffff',
+      padding: '0.625rem 1rem',
+      borderRadius: '0.5rem',
+      border: '1px solid rgba(255,255,255,0.05)',
+      outline: 'none',
+      cursor: 'pointer',
+      transition: 'border-color 0.2s ease',
+    });
+
+    typeSelect.addEventListener('focus', () => {
+      typeSelect.style.borderColor = '#4f9eff';
+    });
+    typeSelect.addEventListener('blur', () => {
+      typeSelect.style.borderColor = 'rgba(255,255,255,0.05)';
+    });
+
+    ['Bug', 'Suggestion', 'Task'].forEach((value) => {
+      const option = document.createElement('option');
+      option.value = value.toLowerCase();
+      option.textContent = value;
+      typeSelect.appendChild(option);
+    });
 
     const btnRow = document.createElement('div');
     btnRow.style.marginTop = '10px';
     btnRow.style.display = 'flex';
     btnRow.style.justifyContent = 'flex-end';
     btnRow.style.gap = '10px';
+    btnRow.style.paddingLeft = '24px';
+    btnRow.style.paddingRight = '24px';
+    btnRow.style.paddingBottom = '24px';
 
     const cancelBtn = document.createElement('button');
     cancelBtn.textContent = 'Cancel';
-    cancelBtn.style.padding = '6px 12px';
+    Object.assign(cancelBtn.style, {
+      flex: '1', // flex-1
+      backgroundColor: 'rgba(255, 255, 255, 0.05)', // bg-white/5
+      color: '#ffffff', // text-white
+      paddingTop: '0.625rem', // py-2.5
+      paddingBottom: '0.625rem', // py-2.5
+      borderRadius: '0.5rem', // rounded-lg
+      transition: 'background-color 0.3s', // transition-colors
+      border: 'none',
+      cursor: 'pointer',
+    });
+    // hover:bg-white/10
+    cancelBtn.addEventListener('mouseenter', () => {
+      cancelBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.10)';
+    });
+
+    cancelBtn.addEventListener('mouseleave', () => {
+      cancelBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+    });
     cancelBtn.onclick = () => {
       overlay.remove();
       marker.remove();
     };
 
     const submitBtn = document.createElement('button');
-    submitBtn.textContent = 'Submit';
-    submitBtn.style.padding = '6px 12px';
-    submitBtn.style.background = '#007bff';
-    submitBtn.style.color = '#fff';
-    submitBtn.style.border = 'none';
-    submitBtn.style.cursor = 'pointer';
+    submitBtn.textContent = 'Submit Issue';
+    Object.assign(submitBtn.style, {
+      flex: '1', // flex-1
+      backgroundColor: '#4f9eff', // bg-[#4f9eff]
+      color: '#ffffff', // text-white
+      paddingTop: '0.625rem', // py-2.5
+      paddingBottom: '0.625rem', // py-2.5
+      borderRadius: '0.5rem', // rounded-lg
+      transition: 'background-color 0.3s', // transition-colors
+      border: 'none',
+      cursor: 'pointer',
+    });
+
+    // hover:bg-[#3d8ae6]
+    submitBtn.addEventListener('mouseenter', () => {
+      submitBtn.style.backgroundColor = '#3d8ae6';
+    });
+
+    submitBtn.addEventListener('mouseleave', () => {
+      submitBtn.style.backgroundColor = '#4f9eff';
+    });
 
     submitBtn.onclick = async () => {
-      const comment = textarea.value.trim();
+      const title = issueInput.value.trim();
+      const comment = descriptionInput.value.trim();
+      const priority = prioritySelect.value;
+      const type = typeSelect.value;
+
+      if (!title) return alert('Please enter a title for the issue.');
       if (!comment) return alert('Please enter a comment.');
+      if (!priority) return alert('Please select a priority.');
 
       const screenshotBlob = dataURLtoBlob(image);
 
@@ -198,7 +445,10 @@
 
         const formData = new FormData();
         formData.append('screenshot', screenshotBlob, 'screenshot.png');
+        formData.append('title', title);
         formData.append('comment', comment);
+        formData.append('priority', priority);
+        formData.append('type', type);
         formData.append('url', window.location.href);
         formData.append('x', x.toString());
         formData.append('y', y.toString());
@@ -226,10 +476,34 @@
       });
     };
 
+    modal.appendChild(header);
+    header.appendChild(headerTitle);
+    header.appendChild(headerButton);
+    headerButton.appendChild(headerButtonContent);
+
+    modal.appendChild(imageWrapper);
+    imageWrapper.appendChild(imageInner);
+    imageInner.appendChild(img);
+    imageWrapper.appendChild(markerText);
+
+    modal.appendChild(form);
+    form.appendChild(issueWrapper);
+    issueWrapper.appendChild(issueLabel);
+    issueWrapper.appendChild(issueInput);
+
+    form.appendChild(descriptionWrapper);
+    descriptionWrapper.appendChild(descriptionLabel);
+    descriptionWrapper.appendChild(descriptionInput);
+
+    modal.append(fieldGrid);
+    fieldGrid.appendChild(priorityWrapper);
+    fieldGrid.appendChild(typeWrapper);
+
+    typeWrapper.appendChild(typeLabel);
+    typeWrapper.appendChild(typeSelect);
+
     btnRow.appendChild(cancelBtn);
     btnRow.appendChild(submitBtn);
-    modal.appendChild(img);
-    modal.appendChild(textarea);
     modal.appendChild(btnRow);
     overlay.appendChild(modal);
     document.body.appendChild(overlay);

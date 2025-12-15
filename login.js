@@ -22,6 +22,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     // Save token to local storage or chrome.storage
     chrome.storage.local.set({ token: data.token, user: data.user }, () => {
       console.log('User logged in');
+
+      window.close();
       // Redirect to main extension UI
     });
 

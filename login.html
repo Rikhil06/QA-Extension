@@ -2,14 +2,124 @@
 <html>
   <head>
     <title>Login</title>
+    <meta charset="utf-8">
+
+    <style>
+      body{
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+          width: 266px;
+          height: 403px;
+          background-color: #121212; /* bg-[#121212] */
+          border-radius: 0.5rem;     /* rounded-lg */
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+          border: 1px solid rgba(255, 255, 255, 0.05);       /* border border-white/5 */
+          overflow: hidden;   
+          padding: 26px;
+          font-size: 16px;
+      }
+
+      h1{
+        color: white;
+        margin-bottom: 24px;
+        font-size: 16px;
+      }
+
+      label{
+        display: block;
+        color: #ffffff99;
+        margin-bottom: 8px;
+         font-size: 16px;
+      }
+
+      input{
+          display: block;
+          width: 90%;                    
+          background-color: #1e1e1e;      /* bg-[#1e1e1e] */
+          color: #ffffff;                  /* text-white */
+          padding-left: 1rem;              /* px-4 (4 * 0.25rem = 1rem) */
+          padding-right: 1rem;             /* px-4 */
+          padding-top: 0.625rem;           /* py-2.5 (2.5 * 0.25rem = 0.625rem) */
+          padding-bottom: 0.625rem;        /* py-2.5 */
+          border-radius: 0.5rem;           /* rounded-lg */
+          border: 1px solid rgba(255, 255, 255, 0.05);  /* border border-white/5 */
+          transition: color 0.3s, border-color 0.3s;     /* transition-colors */
+          outline: none;
+          font-size: 16px;
+      }
+
+      input:focus{
+        border-color: #4f9eff; 
+      }
+
+      .input-wrapper{
+        margin-bottom: 16px;
+      }
+
+      form button{
+        width: 100%;                    /* w-full */
+        background-color: #4f9eff;      /* bg-[#4f9eff] */
+        color: #ffffff;                  /* text-white */
+        padding-top: 0.625rem;           /* py-2.5 (2.5 * 0.25rem = 0.625rem) */
+        padding-bottom: 0.625rem;        /* py-2.5 */
+        border-radius: 0.5rem;           /* rounded-lg */
+        transition: background-color 0.3s; /* transition-colors */
+        cursor: pointer;                 /* for hover effect */
+        border: none; 
+        font-size: 16px;
+      }
+
+      form button:hover{
+        background-color: #3d8ae6; 
+      }
+
+      .register{
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .register button{
+        color: #4f9eff;
+        transition: color 0.3s;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+      }
+
+      .register button:hover{
+        color: #3d8ae6; 
+      }
+
+    </style>
   </head>
   <body>
-    <h1>Login to QA Extension</h1>
+    <h1>Sign In</h1>
     <form id="login-form">
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button type="submit">Login</button>
+      <div class="input-wrapper">
+        <label class="block text-white/60 mb-2">Email</label>
+        <input 
+          id="email"
+          type="email" 
+          class="w-full bg-[#1e1e1e] text-white px-4 py-2.5 rounded-lg border border-white/5 focus:border-[#4f9eff] focus:outline-none transition-colors" 
+          placeholder="you@example.com" 
+          required="" 
+        />
+      </div>
+      <div class="input-wrapper">
+        <label class="block text-white/60 mb-2">Email</label>
+        <input 
+          id="password"
+          type="password" 
+          class="w-full bg-[#1e1e1e] text-white px-4 py-2.5 rounded-lg border border-white/5 focus:border-[#4f9eff] focus:outline-none transition-colors" 
+          placeholder="••••••••"
+          required="" 
+        />
+      </div>
+      <button type="submit" class="w-full bg-[#4f9eff] text-white py-2.5 rounded-lg hover:bg-[#3d8ae6] transition-colors">Log In</button>
     </form>
+      <div class="register">
+        <button class="text-[#4f9eff] hover:text-[#3d8ae6] transition-colors">Don't have an account? Sign up</button>
+      </div>
     <p id="error"></p>
 
     <script src="login.js"></script>
