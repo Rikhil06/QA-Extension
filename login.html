@@ -1,126 +1,231 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Annoture – Sign In</title>
     <meta charset="utf-8">
-
     <style>
-      body{
-        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-          width: 266px;
-          height: 403px;
-          background-color: #121212; /* bg-[#121212] */
-          border-radius: 0.5rem;     /* rounded-lg */
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
-          border: 1px solid rgba(255, 255, 255, 0.05);       /* border border-white/5 */
-          overflow: hidden;   
-          padding: 26px;
-          font-size: 16px;
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        width: 300px;
+        background-color: #141414;
+        color: #fff;
+        padding: 24px;
+        font-size: 14px;
+        /* subtle grid pattern */
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 24px 24px;
       }
 
-      h1{
-        color: white;
-        margin-bottom: 24px;
-        font-size: 16px;
+      /* ── Header ─────────────────────────────────────── */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
       }
 
-      label{
-        display: block;
-        color: #ffffff99;
-        margin-bottom: 8px;
-         font-size: 16px;
+      .logo {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        background: linear-gradient(135deg, #8B5CF6, #6366F1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
       }
 
-      input{
-          display: block;
-          width: 90%;                    
-          background-color: #1e1e1e;      /* bg-[#1e1e1e] */
-          color: #ffffff;                  /* text-white */
-          padding-left: 1rem;              /* px-4 (4 * 0.25rem = 1rem) */
-          padding-right: 1rem;             /* px-4 */
-          padding-top: 0.625rem;           /* py-2.5 (2.5 * 0.25rem = 0.625rem) */
-          padding-bottom: 0.625rem;        /* py-2.5 */
-          border-radius: 0.5rem;           /* rounded-lg */
-          border: 1px solid rgba(255, 255, 255, 0.05);  /* border border-white/5 */
-          transition: color 0.3s, border-color 0.3s;     /* transition-colors */
-          outline: none;
-          font-size: 16px;
+      .logo svg {
+        width: 14px;
+        height: 14px;
       }
 
-      input:focus{
-        border-color: #4f9eff; 
+      h1 {
+        font-size: 17px;
+        font-weight: 600;
+        color: #fff;
+        letter-spacing: -0.3px;
       }
 
-      .input-wrapper{
-        margin-bottom: 16px;
+      /* ── Field rows (label | input) ─────────────────── */
+      .field-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
       }
 
-      form button{
-        width: 100%;                    /* w-full */
-        background-color: #4f9eff;      /* bg-[#4f9eff] */
-        color: #ffffff;                  /* text-white */
-        padding-top: 0.625rem;           /* py-2.5 (2.5 * 0.25rem = 0.625rem) */
-        padding-bottom: 0.625rem;        /* py-2.5 */
-        border-radius: 0.5rem;           /* rounded-lg */
-        transition: background-color 0.3s; /* transition-colors */
-        cursor: pointer;                 /* for hover effect */
-        border: none; 
-        font-size: 16px;
+      .field-label {
+        width: 68px;
+        flex-shrink: 0;
+        font-size: 13px;
+        color: rgba(255,255,255,0.45);
       }
 
-      form button:hover{
-        background-color: #3d8ae6; 
+      .field-input {
+        flex: 1;
+        background: #1f1f1f;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 13px;
+        color: #fff;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+        font-family: inherit;
       }
 
-      .register{
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      .field-input::placeholder {
+        color: rgba(255,255,255,0.2);
       }
 
-      .register button{
-        color: #4f9eff;
-        transition: color 0.3s;
+      .field-input:focus {
+        border-color: rgba(139, 92, 246, 0.6);
+        background: #222;
+      }
+
+      /* ── Divider ─────────────────────────────────────── */
+      .divider {
+        height: 1px;
+        background: rgba(255,255,255,0.06);
+        margin: 16px 0;
+      }
+
+      /* ── Submit button ───────────────────────────────── */
+      .submit-btn {
+        width: 100%;
+        padding: 11px;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(135deg, #7C3AED, #6366F1);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.1s;
+        letter-spacing: 0.1px;
+        font-family: inherit;
+        box-shadow: 0 4px 20px rgba(109, 86, 240, 0.35);
+      }
+
+      .submit-btn:hover  { opacity: 0.9; }
+      .submit-btn:active { transform: scale(0.98); }
+
+      .submit-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* ── Spinner ─────────────────────────────────────── */
+      .submit-btn .btn-spinner {
+        display: none;
+        width: 15px;
+        height: 15px;
+        animation: spin 0.75s linear infinite;
+      }
+
+      .submit-btn.loading .btn-text    { display: none; }
+      .submit-btn.loading .btn-spinner { display: inline-block; }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ── Error message ───────────────────────────────── */
+      #error {
+        font-size: 12px;
+        color: #f87171;
+        margin-top: 10px;
+        min-height: 16px;
+        text-align: center;
+      }
+
+      /* ── Register link ───────────────────────────────── */
+      .register {
+        margin-top: 14px;
+        text-align: center;
+      }
+
+      .register button {
         background: transparent;
         border: none;
-        font-size: 16px;
+        font-size: 12px;
+        color: rgba(255,255,255,0.35);
+        cursor: pointer;
+        transition: color 0.2s;
+        font-family: inherit;
       }
 
-      .register button:hover{
-        color: #3d8ae6; 
+      .register button span {
+        color: #8B5CF6;
       }
 
+      .register button:hover span {
+        color: #a78bfa;
+      }
     </style>
   </head>
   <body>
-    <h1>Sign In</h1>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344"/>
+          <path d="m9 11 3 3L22 4"/>
+        </svg>
+      </div>
+      <h1>Sign In</h1>
+    </div>
+
+    <!-- Login form -->
     <form id="login-form">
-      <div class="input-wrapper">
-        <label class="block text-white/60 mb-2">Email</label>
-        <input 
+      <div class="field-row">
+        <span class="field-label">Email</span>
+        <input
           id="email"
-          type="email" 
-          class="w-full bg-[#1e1e1e] text-white px-4 py-2.5 rounded-lg border border-white/5 focus:border-[#4f9eff] focus:outline-none transition-colors" 
-          placeholder="you@example.com" 
-          required="" 
+          type="email"
+          class="field-input"
+          placeholder="you@example.com"
+          required
         />
       </div>
-      <div class="input-wrapper">
-        <label class="block text-white/60 mb-2">Email</label>
-        <input 
+
+      <div class="field-row">
+        <span class="field-label">Password</span>
+        <input
           id="password"
-          type="password" 
-          class="w-full bg-[#1e1e1e] text-white px-4 py-2.5 rounded-lg border border-white/5 focus:border-[#4f9eff] focus:outline-none transition-colors" 
+          type="password"
+          class="field-input"
           placeholder="••••••••"
-          required="" 
+          required
         />
       </div>
-      <button type="submit" class="w-full bg-[#4f9eff] text-white py-2.5 rounded-lg hover:bg-[#3d8ae6] transition-colors">Log In</button>
+
+      <div class="divider"></div>
+
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Log In</span>
+        <svg class="btn-spinner" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="31.4 31.4" />
+        </svg>
+      </button>
     </form>
-      <div class="register">
-        <button class="text-[#4f9eff] hover:text-[#3d8ae6] transition-colors">Don't have an account? Sign up</button>
-      </div>
+
     <p id="error"></p>
+
+    <div class="register">
+      <button type="button">
+        No account? <span>Sign up →</span>
+      </button>
+    </div>
 
     <script src="login.js"></script>
   </body>

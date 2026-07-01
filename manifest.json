@@ -1,17 +1,47 @@
 {
-    "manifest_version": 3,
-    "name": "QA Click Reporter",
-    "version": "1.0",
-    "description": "Click anywhere on a page to report a visual bug with screenshot.",
-    "permissions": ["scripting", "activeTab", "storage", "tabs"],
-    "host_permissions": ["<all_urls>"],
-    "action": {
-      "default_popup": "login.html",
-      "default_title": "Enable QA Mode"
-    },
-    "background": {
-      "service_worker": "background.js"
+  "manifest_version": 3,
+  "name": "Annoture",
+  "version": "1.0.0",
+  "description": "Click anywhere on a page to report a visual bug with screenshot. Feedback is organised into a Kanban board for your team.",
+  "homepage_url": "https://annoture.com/privacy-policy",
+  "minimum_chrome_version": "116",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "annoture@annoture.com",
+      "strict_min_version": "115.0"
     }
-    
+  },
+  "permissions": ["scripting", "activeTab", "storage", "tabs"],
+  "optional_permissions": ["tabCapture", "offscreen"],
+  "host_permissions": ["<all_urls>"],
+  "_host_permissions_note": "Required: background.js uses tabs.onActivated and tabs.onUpdated to inject scripts programmatically into arbitrary tabs (not just on user gesture). activeTab alone is insufficient for these listeners.",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["console-capture.js"],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "action": {
+    "default_popup": "login.html",
+    "default_title": "Enable QA Mode",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
   }
-  
+}
