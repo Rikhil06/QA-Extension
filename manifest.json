@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Annoture",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Click anywhere on a page to report a visual bug with screenshot. Feedback is organised into a Kanban board for your team.",
   "homepage_url": "https://annoture.com/privacy-policy",
   "minimum_chrome_version": "116",

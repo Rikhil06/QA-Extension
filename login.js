@@ -3,8 +3,9 @@ const ext = typeof browser !== 'undefined' ? browser : chrome;
 
 // ─── URLs ─────────────────────────────────────────────────────────────────────
 // Change these constants when you deploy to a new environment.
-const BACKEND_URL   = 'https://qa-backend-105l.onrender.com';
-const DASHBOARD_URL = 'https://annoture.com'; // frontend
+const BACKEND_URL   = 'https://api.annoture.com';
+const DASHBOARD_URL = 'https://app.annoture.com'; // app
+const REGISTER_URL  = 'https://app.annoture.com/register';
 // ─────────────────────────────────────────────────────────────────────────────
 
 // If already logged in, skip the form and activate QA mode immediately
@@ -36,7 +37,7 @@ ext.storage.session.get(['token'], ({ token }) => {
 });
 
 document.querySelector('.register button').addEventListener('click', () => {
-  ext.tabs.create({ url: `${DASHBOARD_URL}/register` });
+  ext.tabs.create({ url: REGISTER_URL });
 });
 
 document.getElementById('login-form').addEventListener('submit', async (e) => {

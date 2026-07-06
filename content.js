@@ -21,8 +21,8 @@
 
   // ─── URLs ───────────────────────────────────────────────────────────────
   // Change these constants when you deploy to a new environment.
-  const BACKEND_URL   = 'https://qa-backend-105l.onrender.com';
-  const DASHBOARD_URL = 'https://annoture.com'; // frontend — used for upgrade links
+  const BACKEND_URL   = 'https://api.annoture.com';
+  const DASHBOARD_URL = 'https://app.annoture.com'; // app — used for upgrade links
   // ─────────────────────────────────────────────────────────────────────────
 
   function scrubSensitiveParams(url) {
