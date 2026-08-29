@@ -705,6 +705,50 @@
       row.appendChild(val);
       envBar.appendChild(row);
     });
+
+    // Device row — editable so testers can type the exact device name (e.g. "iPhone 16 Pro Max")
+    const deviceRow = document.createElement('div');
+    Object.assign(deviceRow.style, {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      minWidth: '0',
+    });
+
+    const deviceLbl = document.createElement('span');
+    deviceLbl.textContent = 'Device';
+    Object.assign(deviceLbl.style, {
+      flexShrink: '0',
+      width: '56px',
+      fontSize: '11px',
+      fontWeight: '500',
+      color: 'rgba(255,255,255,0.35)',
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px',
+    });
+
+    const deviceInput = document.createElement('input');
+    deviceInput.type = 'text';
+    deviceInput.value = getDevice();
+    deviceInput.placeholder = 'e.g. iPhone 16 Pro Max';
+    Object.assign(deviceInput.style, {
+      flex: '1',
+      fontSize: '12px',
+      color: 'rgba(255,255,255,0.65)',
+      backgroundColor: '#222',
+      border: '1px solid rgba(255,255,255,0.06)',
+      borderRadius: '6px',
+      padding: '4px 10px',
+      fontFamily: 'ui-monospace, "Cascadia Code", monospace',
+      outline: 'none',
+      transition: 'border-color 0.2s',
+    });
+    deviceInput.addEventListener('focus', () => { deviceInput.style.borderColor = '#4f9eff'; });
+    deviceInput.addEventListener('blur',  () => { deviceInput.style.borderColor = 'rgba(255,255,255,0.06)'; });
+
+    deviceRow.appendChild(deviceLbl);
+    deviceRow.appendChild(deviceInput);
+    envBar.appendChild(deviceRow);
     // ─────────────────────────────────────────────────────────────────────────
 
     const form = document.createElement('div');
@@ -1034,6 +1078,7 @@
         formData.append('pageTitle', document.title);
         formData.append('browser', getBrowserFull());
         formData.append('os', getOSFull());
+        formData.append('device', deviceInput.value.trim());
         formData.append('screenSize', `${screen.width}x${screen.height}`);
         formData.append('viewport', `${window.innerWidth}x${window.innerHeight}`);
         formData.append('cssPath', cssPath || '');
@@ -1159,6 +1204,21 @@
       el = el.parentElement;
     }
     return parts.join(' > ') || el?.nodeName?.toLowerCase() || '';
+  }
+
+  function getDevice() {
+    const ua = navigator.userAgent;
+    // Android — often includes model name e.g. "SM-G991B"
+    const androidModel = ua.match(/Android[\s\d.]+;\s*([^)]+)\)/);
+    if (androidModel) {
+      const model = androidModel[1].trim();
+      // Strip trailing "Build" suffix if present
+      return model.replace(/\s*Build.*$/, '').trim() || 'Android';
+    }
+    if (ua.includes('iPad')) return 'iPad';
+    if (ua.includes('iPhone')) return 'iPhone';
+    // Desktop — no device
+    return '';
   }
 
   function getBrowser() {
